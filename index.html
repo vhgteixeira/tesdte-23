@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Screen Except Button</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            color: #FFA500; /* Laranja */
+            text-align: center;
+            font-size: 24px;
+            font-family: 'Poppins', sans-serif; /* Use the custom font 'Poppins' */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .rounded-button {
+            background-color: #FFA500; /* Laranja */
+            color: black;
+            border: none;
+            border-radius: 20px; /* Adjust the border-radius value to change the roundness */
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            text-decoration: none; /* Removes default link underline */
+            font-family: 'Poppins', sans-serif; /* Use the custom font 'Poppins' */
+        }
+        .rounded-button:hover {
+            background-color: #FF8C00; /* Laranja mais escuro ao passar o mouse */
+        }
+        .email-input {
+            background-color: transparent;
+            border: 2px solid #FFA500; /* Laranja */
+            color: #FFA500; /* Laranja */
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            width: 300px;
+            font-family: 'Poppins', sans-serif; /* Use the custom font 'Poppins' */
+        }
+        .email-input:focus {
+            background-color: white;
+        }
+        .white-text {
+            color: white;
+        }
+        .orange-text { /* Laranja */
+            color: #FFA500; /* Laranja */
+            text-transform: uppercase; /* Convert text to uppercase */
+        }
+        .secret-text {
+            color: white; /* Texto em branco */
+            margin-bottom: 20px; /* Espaçamento abaixo do texto */
+        }
+        .amount-text {
+            color: #FFA500; /* Laranja */
+        }
+        /* Slower blinking animation for the button */
+        @keyframes blink {
+            0% { opacity: 1; }
+            25% { opacity: 0; }
+            50% { opacity: 1; }
+            75% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .blink-effect {
+            animation: blink 4s infinite;
+        }
+    </style>
+</head>
+<body>
+    <span class="white-text">Digite o seu e-mail para<br><span class="orange-text">DESCOBRIR</span> o saque secreto:</span>
+    <br>
+    <input type="email" class="email-input" placeholder="Digite aqui o seu e-mail">
+    <br>
+    <button onclick="deleteScreen()" class="rounded-button">Ativar E-mail</button>
+
+    <script>
+        function deleteScreen() {
+            document.body.innerHTML = ''; // Remove all elements inside the body
+            const button = document.createElement('button'); // Recreate the button
+            button.className = 'rounded-button blink-effect'; // Add the blink effect class
+            button.textContent = 'Activating...'; // Change the button text
+            button.onclick = deleteScreen; // Set the click event again
+            document.body.appendChild(button); // Add the button back to the body
+            setTimeout(stopBlink, 3000); // Stop blinking after 3 seconds
+        }
+
+        function stopBlink() {
+            const button = document.querySelector('.rounded-button');
+            button.classList.remove('blink-effect'); // Remove the blink effect class
+            button.textContent = 'Acessar PowerBet'; // Change the button text
+
+            // Create a new element for the secret text
+            const textElement = document.createElement('div');
+            textElement.className = 'secret-text'; // Add the class for white text
+            textElement.innerHTML = 'Saque secreto gerado: <span class="amount-text">R$337,22</span>';
+            document.body.insertBefore(textElement, button); // Insert above the button
+
+            // Add event listener for button redirection
+            button.addEventListener('click', function() {
+                window.location.href = 'https://powerbet.cash?aff=161';
+            });
+        }
+    </script>
+</body>
+</html>
